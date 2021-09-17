@@ -35,7 +35,7 @@ min = 0
 
 sec2 = 0
 
-sec = 88760
+sec = 0
 
 
  
@@ -54,7 +54,7 @@ def time_sol():
 
        
 
-@app.route('/') # 'http://127.0.0.1:8888/'
+@app.route('/') 
 def sol_api():
 
 
@@ -63,7 +63,7 @@ def sol_api():
 
     min = (sec // 60) % 60
 
-    hour = (sec // 3600) % 60
+    hour = (sec // 3600) % 24
 
     sol = sec // 88775
 
