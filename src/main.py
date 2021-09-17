@@ -55,7 +55,7 @@ def time_sol():
        
 
 @app.route('/') # 'http://127.0.0.1:8888/'
-def get_store():
+def sol_api():
 
 
 
