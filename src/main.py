@@ -15,44 +15,45 @@ limitations under the License.
 
 import time
 from flask import Flask, jsonify, request, render_template
-import concurrent.futures
 import json
 
 
-
 app = Flask(__name__)
-     
-     
+
+
+@app.route('/mars_api/') 
+def mars_api_home():
+
+
+    mars_time = "<h1>mars_api<h1>"
+
+
+  
+
+    return mars_time
+
+@app.route('/mars_api/<req>') 
+def mars_api(req):
+
+    print(req)
+
+    mars_time = "Home"
+
+
+    if req == "sol":
+        mars_time = sol_api()
+   
+  
+
+    return jsonify(mars_time)
 
 
 
 
-sec = 0
-
-
-def time_sol():
-
-    
-
-    while True:
-
-        global sec
-
-
-        time.sleep(0.1)
-
-        
-
-        sec = time.perf_counter()
-
-
-
-@app.route('/') 
 def sol_api():
 
 
-
-    sec2 = 0
+    sec = 0
 
     min = 0
 
@@ -60,12 +61,10 @@ def sol_api():
 
     sol = 0
 
-    sec_round = round(sec)
+    sec_round = round(time.perf_counter())
 
 
-
-
-    sec2 = sec_round % 60
+    sec = sec_round % 60
 
     min = (sec_round // 60) % 60
 
@@ -79,18 +78,18 @@ def sol_api():
         "Sol": sol,
         "hour": hour,
         "min": min,
-        "sec": sec2,
+        "sec": sec,
     }
 
 
-    return jsonify(mars_time)
-    
-
-
+    return mars_time
 
    
 if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8888, debug=True)
 
-    executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
-    executor.submit(time_sol)
-    executor.submit(app.run(host='0.0.0.0', port=8888, debug=True))
+
+
+
+    
+        
